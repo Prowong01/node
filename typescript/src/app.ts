@@ -31,10 +31,21 @@ app.get("/users", async (req: Request, res: Response) => {
 //post route -> new user -> name, email -> req.body
 // -> /user/:id?name -> Request <{}, {}, {},{}>
 
-interface User {
-    name: string;
-    email: string;
+// File: ./models/User.ts
+
+import mongoose, { Schema, Document } from 'mongoose';
+
+export interface IUser extends Document {
+  name: string;
+  email: string;
 }
+
+const UserSchema: Schema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true }
+});
+
+export const User = mongoose.model<IUser>('User', UserSchema);
 
 app.post("/user", (req: Request<{}, {}, User>, res: Response) => {
     const { name, email } = req.body;
