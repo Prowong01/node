@@ -75,7 +75,7 @@ const loginUser = async (req, res) => {
         if (!isPasswordMatch) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid credentials!",
+                message: "Incorrect password!",
             });
         }
 
@@ -101,7 +101,7 @@ const loginUser = async (req, res) => {
         console.log(e);
         res.status(500).json({
             success: false,
-            message: "Some error occured! Please try again",
+            message: "Some error occurred! Please try again",
         });
     }
 };
